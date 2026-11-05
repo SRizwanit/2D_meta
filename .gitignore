@@ -1,0 +1,10 @@
+node_modules/
+out/
+.chunks/
+videos/
+*.mp4
+!final.mp4
+.DS_Store
+.env
+public/audio.mp3
+public/timestamp.json

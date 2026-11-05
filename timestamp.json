@@ -1,0 +1,42 @@
+[
+  {
+    "start": 0,
+    "end": 4.2,
+    "text": "ঘটনাটির সময় উনিশশো ছিয়াত্তর সাল। নড়াইল জেলার",
+    "scene": "village_day",
+    "character": "prahlad",
+    "emotion": "normal"
+  },
+  {
+    "start": 4.2,
+    "end": 9.1,
+    "text": "লোহাগাড়া উপজেলার লাহুরিয়া ইউনিয়নের ছোট্ট গ্রাম লাহুরিয়া।",
+    "scene": "village_day",
+    "character": "prahlad",
+    "emotion": "normal"
+  },
+  {
+    "start": 9.1,
+    "end": 15.5,
+    "text": "এই গ্রামেই প্রহ্লাদ বিশ্বাস, তার স্ত্রী, তার তিন ছেলে প্রভাষ, পঙ্কজ ও প্রকাশ।",
+    "scene": "room_night",
+    "character": "prahlad",
+    "emotion": "normal"
+  },
+  {
+    "start": 15.5,
+    "end": 22.8,
+    "text": "ফসলি জমির মাঝখানে একটি ভিটা। সেখানে প্রহ্লাদ বিশ্বাস পরিবার নিয়ে বসবাস করে।",
+    "scene": "fasholi_field",
+    "character": "prahlad",
+    "emotion": "worried"
+  },
+  {
+    "start": 22.8,
+    "end": 28,
+    "text": "চতুরদিকে ফসলি জমি। গ্রাম থেকে ১০ থেকে ১৫ মিনিট দূরে।",
+    "scene": "fasholi_field",
+    "character": "prahlad",
+    "emotion": "worried"
+  }
+]
