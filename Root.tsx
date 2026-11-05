@@ -23,7 +23,9 @@ const calculateMetadata: CalculateMetadataFunction<Record<string, unknown>> = as
       const {groups} = parseTimestampData(await res.json());
       if (groups.length) {
         const last = groups[groups.length - 1].end;
-        return {durationInFrames: Math.ceil((last + TAIL_SECONDS) * LAYOUT.fps)};
+        // Whole seconds first, then frames - identical to the "plan" job in render.yml
+        const durationSec = Math.ceil(last + TAIL_SECONDS);
+        return {durationInFrames: durationSec * LAYOUT.fps};
       }
     } catch (e) {
       // try next file

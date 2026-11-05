@@ -6,7 +6,7 @@ This is the **FINAL complete package** after 8 steps. You can now create 2D horr
 
 ---
 
-## 📦 What's Inside (Flat Structure - 19 Files)
+## 📦 What's Inside (Flat Structure)
 
 **Core (Step 1):**
 - `package.json`, `tsconfig.json`, `remotion.config.ts`, `index.ts`, `Root.tsx`, `Styles.tsx`
@@ -23,13 +23,13 @@ This is the **FINAL complete package** after 8 steps. You can now create 2D horr
 - `Composition.tsx` - Main composition 1080x1920 30fps, tries 5 paths for timestamp.json, auto duration
 
 **Render (Step 7):**
-- `render.yml` (ROOT) - Your requirement: no subfolders, this file in root
-- `.github/workflows/render.yml` - Same file for GitHub Actions (copy via setup.sh)
-- `stitch.js` - Local stitch script
-- `setup.sh` - Mobile helper to create .github/workflows folder
+- `.github/workflows/render.yml` - GitHub Actions: plan -> one job per 500-frame chunk (each uploads its own artifact when finished) -> stitch + audio
 
-**Docs:**
-- `README.md` (this file), `.gitignore`, `timestamp.json` (example), `2DAnimationRizwan.txt` (progress log)
+**Data:**
+- `Rizwan_story1.json` (word timestamps), `audio.mp3`
+
+**Docs / config:**
+- `README.md` (this file), `.gitignore`, `package-lock.json`
 
 ---
 
@@ -61,15 +61,8 @@ Perfect for ghost story!
    - Upload your `Rizwan_story1.json` as `timestamp.json` to ROOT (or `public/`)
    - You can also keep both in `public/` folder: create `public/` folder and copy files there
 
-4. **Setup Workflow:**
-   - Open Terminal in github.dev (Menu -> Terminal -> New Terminal)
-   - Run:
-     ```bash
-     chmod +x setup.sh
-     ./setup.sh
-     ```
-   - This creates `.github/workflows/render.yml` from root `render.yml`
-   - If setup.sh fails, manually create folder `.github/workflows/` and copy `render.yml` there
+4. **Workflow:**
+   - `.github/workflows/render.yml` is already in the project - nothing to set up.
 
 5. **Push:**
    ```bash
@@ -82,13 +75,14 @@ Perfect for ghost story!
    - Go to github.com/YOUR_USERNAME/2d-horror-animation -> Actions tab
    - You will see "Render 2D Horror Animation" workflow
    - Click "Run workflow" -> Leave defaults (fps 30, chunk 500) -> Run
-   - Wait 45-60 minutes for 106 sec story (7 chunks x 500 frames)
-   - You can watch logs: each chunk rendering
+   - The 7 chunks (500 frames each) render as separate jobs, up to 4 at a time
+   - As soon as a chunk finishes, its own artifact `video-chunk-<start>-<end>` appears on the run page - no need to wait for the others
+   - If one chunk fails, use "Re-run failed jobs" - finished chunks are kept
 
 7. **Download:**
    - After workflow finishes, go to workflow run page -> Scroll down to Artifacts
    - Download `final-video-full` -> This is your final 1080x1920 vertical video!
-   - Also `video-chunks-500frames-each` has all 500-frame pieces (backup)
+   - Each `video-chunk-<start>-<end>` artifact is a single 500-frame piece (backup, available as soon as it finishes)
 
 8. **Post:**
    - Download final.mp4 to phone
@@ -106,7 +100,7 @@ If you have PC:
 ```bash
 npm install
 mkdir -p public
-cp timestamp.json public/timestamp.json
+cp Rizwan_story1.json public/timestamp.json
 cp audio.mp3 public/audio.mp3
 npm run dev  # Opens Remotion Studio at localhost:3000
 ```
@@ -114,9 +108,8 @@ npm run dev  # Opens Remotion Studio at localhost:3000
 To render locally in chunks:
 ```bash
 npm run render  # Full render
-# OR chunk render:
-npx remotion render Composition out/chunk_0_499.mp4 --frames=0-499
-node stitch.js  # Stitches all chunks to out/final.mp4
+# OR a single chunk:
+npx remotion render index.ts Composition out/chunk_0_499.mp4 --frames=0-499 --muted
 ```
 
 ---
@@ -174,10 +167,11 @@ All 3 work!
 ## 🆘 Troubleshooting
 
 - **Workflow cannot push**: Go to Repo Settings -> Actions -> General -> Workflow permissions -> Check "Read and write permissions" -> Save
-- **timestamp.json not found**: Ensure file is in `public/timestamp.json` OR root `timestamp.json`. Workflow copies root to public.
+- **timestamp.json not found**: Keep `Rizwan_story1.json` (or `timestamp.json`) in the root. The workflow copies it to `public/timestamp.json`.
 - **audio.mp3 not found**: Same, put in root or public.
 - **Out of memory**: Reduce concurrency is already 1, reduce chunk_size to 250 in workflow dispatch inputs
-- **Bangla font broken**: Root.tsx imports Noto Sans Bengali from Google Fonts, needs internet during render (GitHub runner has internet)
+- **Bangla font broken**: Root.tsx loads Noto Sans Bengali / Hind Siliguri via `@remotion/google-fonts` (waits until ready; needs internet during render - GitHub runner has it)
+- **"frame range is not inbetween" error**: Frame count must be the same in `Root.tsx` and the `plan` job of `render.yml` (both use `ceil(last_end + 2s) x 30`)
 
 ---
 
