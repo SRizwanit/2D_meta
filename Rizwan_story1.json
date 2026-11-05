@@ -1,146 +1,856 @@
 {
   "transcription": [
-    { "word": "ঘটনাটির", "start_ms": 0, "end_ms": 710, "source": "1" },
-    { "word": "সময়", "start_ms": 940, "end_ms": 2350, "source": "1" },
-    { "word": "উনিশশো", "start_ms": 3110, "end_ms": 3530, "source": "1" },
-    { "word": "ছিয়াত্তর", "start_ms": 3950, "end_ms": 4440, "source": "1" },
-    { "word": "সাল।", "start_ms": 4680, "end_ms": 5050, "source": "1" },
-    { "word": "নড়াইল", "start_ms": 5870, "end_ms": 6320, "source": "1" },
-    { "word": "জেলার", "start_ms": 6620, "end_ms": 6960, "source": "1" },
-    { "word": "লোহাগাড়া", "start_ms": 7320, "end_ms": 7820, "source": "1" },
-    { "word": "উপজেলার", "start_ms": 8200, "end_ms": 8730, "source": "1" },
-    { "word": "লাহুরিয়া", "start_ms": 9120, "end_ms": 9570, "source": "1" },
-    { "word": "ইউনিয়নের", "start_ms": 9970, "end_ms": 10470, "source": "1" },
-    { "word": "ছোট্ট", "start_ms": 10760, "end_ms": 11180, "source": "1" },
-    { "word": "গ্রাম", "start_ms": 11590, "end_ms": 12040, "source": "1" },
-    { "word": "লাহুরিয়া।", "start_ms": 12450, "end_ms": 13170, "source": "1" },
-    { "word": "এই", "start_ms": 13800, "end_ms": 14040, "source": "1" },
-    { "word": "গ্রামেই", "start_ms": 14350, "end_ms": 14780, "source": "1" },
-    { "word": "প্রহ্লাদ", "start_ms": 15150, "end_ms": 15610, "source": "1" },
-    { "word": "বিশ্বাস,", "start_ms": 16030, "end_ms": 16450, "source": "1" },
-    { "word": "তার", "start_ms": 16750, "end_ms": 17000, "source": "1" },
-    { "word": "স্ত্রী,", "start_ms": 17350, "end_ms": 17820, "source": "1" },
-    { "word": "তার", "start_ms": 18230, "end_ms": 18450, "source": "1" },
-    { "word": "তিন", "start_ms": 18690, "end_ms": 18980, "source": "1" },
-    { "word": "ছেলে", "start_ms": 19280, "end_ms": 19600, "source": "1" },
-    { "word": "প্রভাষ,", "start_ms": 20000, "end_ms": 20550, "source": "1" },
-    { "word": "পঙ্কজ", "start_ms": 20950, "end_ms": 21460, "source": "1" },
-    { "word": "ও", "start_ms": 21630, "end_ms": 21810, "source": "1" },
-    { "word": "প্রকাশ।", "start_ms": 22170, "end_ms": 22690, "source": "1" },
-    { "word": "প্রভাসের", "start_ms": 23410, "end_ms": 23830, "source": "1" },
-    { "word": "বয়স", "start_ms": 24040, "end_ms": 24390, "source": "1" },
-    { "word": "পঁয়ত্রিশ,", "start_ms": 24860, "end_ms": 25480, "source": "1" },
-    { "word": "পঙ্কজের", "start_ms": 25770, "end_ms": 26170, "source": "1" },
-    { "word": "বয়স", "start_ms": 26400, "end_ms": 26710, "source": "1" },
-    { "word": "তিরিশের", "start_ms": 27120, "end_ms": 27530, "source": "1" },
-    { "word": "কাকাছাকাছি।", "start_ms": 27850, "end_ms": 28620, "source": "1" },
-    { "word": "বড়", "start_ms": 29190, "end_ms": 29500, "source": "1" },
-    { "word": "এবং", "start_ms": 29770, "end_ms": 30040, "source": "1" },
-    { "word": "মেজো", "start_ms": 30340, "end_ms": 30640, "source": "1" },
-    { "word": "ছেলেকে", "start_ms": 31010, "end_ms": 31410, "source": "1" },
-    { "word": "প্রহ্লাদ", "start_ms": 31730, "end_ms": 32130, "source": "1" },
-    { "word": "বিশ্বাস", "start_ms": 32510, "end_ms": 32900, "source": "1" },
-    { "word": "বিয়ে", "start_ms": 33170, "end_ms": 33490, "source": "1" },
-    { "word": "দিয়েছেন।", "start_ms": 33900, "end_ms": 34420, "source": "1" },
-    { "word": "একান্নবর্তী", "start_ms": 35050, "end_ms": 35680, "source": "1" },
-    { "word": "পরিবারে", "start_ms": 36040, "end_ms": 36470, "source": "1" },
-    { "word": "তাদের", "start_ms": 36760, "end_ms": 37040, "source": "1" },
-    { "word": "বসবাস।", "start_ms": 37470, "end_ms": 37950, "source": "1" },
-    { "word": "কিন্তু", "start_ms": 38480, "end_ms": 38870, "source": "1" },
-    { "word": "ছেলের", "start_ms": 39210, "end_ms": 39590, "source": "1" },
-    { "word": "বউ", "start_ms": 39950, "end_ms": 40380, "source": "1" },
-    { "word": "এবং", "start_ms": 40680, "end_ms": 40990, "source": "1" },
-    { "word": "ছেলের", "start_ms": 41280, "end_ms": 41650, "source": "1" },
-    { "word": "পরিবারের", "start_ms": 42080, "end_ms": 42530, "source": "1" },
-    { "word": "সাথে", "start_ms": 42790, "end_ms": 43100, "source": "1" },
-    { "word": "প্রহ্লাদ", "start_ms": 43410, "end_ms": 43800, "source": "1" },
-    { "word": "বিশ্বাস", "start_ms": 44170, "end_ms": 44580, "source": "1" },
-    { "word": "ও", "start_ms": 44770, "end_ms": 44920, "source": "1" },
-    { "word": "তার", "start_ms": 45150, "end_ms": 45360, "source": "1" },
-    { "word": "স্ত্রীর", "start_ms": 45720, "end_ms": 46090, "source": "1" },
-    { "word": "বনিবনা", "start_ms": 46520, "end_ms": 46970, "source": "1" },
-    { "word": "না", "start_ms": 47250, "end_ms": 47520, "source": "1" },
-    { "word": "হওয়ায়", "start_ms": 47930, "end_ms": 48420, "source": "1" },
-    { "word": "ছোট", "start_ms": 48770, "end_ms": 49050, "source": "1" },
-    { "word": "ছেলে", "start_ms": 49350, "end_ms": 49660, "source": "1" },
-    { "word": "প্রকাশকে", "start_ms": 50060, "end_ms": 50550, "source": "1" },
-    { "word": "নিয়ে", "start_ms": 50780, "end_ms": 51090, "source": "1" },
-    { "word": "তাদের", "start_ms": 51360, "end_ms": 51630, "source": "1" },
-    { "word": "বাড়ি", "start_ms": 51950, "end_ms": 52270, "source": "1" },
-    { "word": "থেকে", "start_ms": 52530, "end_ms": 52820, "source": "1" },
-    { "word": "কিছুটা", "start_ms": 53230, "end_ms": 53610, "source": "1" },
-    { "word": "দুরে", "start_ms": 54020, "end_ms": 54410, "source": "1" },
-    { "word": "তাদেরই", "start_ms": 54890, "end_ms": 55300, "source": "1" },
-    { "word": "দীর্ঘদিন", "start_ms": 55760, "end_ms": 56220, "source": "1" },
-    { "word": "ধরে", "start_ms": 56480, "end_ms": 56740, "source": "1" },
-    { "word": "পতিত", "start_ms": 57070, "end_ms": 57420, "source": "1" },
-    { "word": "থাকা", "start_ms": 57690, "end_ms": 58010, "source": "1" },
-    { "word": "একটি", "start_ms": 58290, "end_ms": 58600, "source": "1" },
-    { "word": "জমিতে", "start_ms": 59000, "end_ms": 59370, "source": "1" },
-    { "word": "তিনটি", "start_ms": 59720, "end_ms": 60060, "source": "1" },
-    { "word": "ঘর", "start_ms": 60310, "end_ms": 60590, "source": "1" },
-    { "word": "নির্মাণ", "start_ms": 61000, "end_ms": 61390, "source": "1" },
-    { "word": "করেন।", "start_ms": 61760, "end_ms": 62140, "source": "1" },
-    { "word": "ওই", "start_ms": 62510, "end_ms": 62800, "source": "1" },
-    { "word": "জমির", "start_ms": 63100, "end_ms": 63440, "source": "1" },
-    { "word": "চতুরদিকে", "start_ms": 63890, "end_ms": 64450, "source": "1" },
-    { "word": "রয়েছে", "start_ms": 64740, "end_ms": 65110, "source": "1" },
-    { "word": "ফসলি", "start_ms": 65490, "end_ms": 65860, "source": "1" },
-    { "word": "জমি।", "start_ms": 66200, "end_ms": 66530, "source": "1" },
-    { "word": "সেটি", "start_ms": 67120, "end_ms": 67440, "source": "1" },
-    { "word": "আসলে", "start_ms": 67730, "end_ms": 68060, "source": "1" },
-    { "word": "কোনো", "start_ms": 68350, "end_ms": 68670, "source": "1" },
-    { "word": "গ্রাম", "start_ms": 69020, "end_ms": 69340, "source": "1" },
-    { "word": "নয়।", "start_ms": 69700, "end_ms": 69970, "source": "1" },
-    { "word": "গ্রামটা", "start_ms": 70440, "end_ms": 70870, "source": "1" },
-    { "word": "ফসলি", "start_ms": 71220, "end_ms": 71590, "source": "1" },
-    { "word": "জমির", "start_ms": 71870, "end_ms": 72260, "source": "1" },
-    { "word": "ঠিক", "start_ms": 72540, "end_ms": 72830, "source": "1" },
-    { "word": "পাশে।", "start_ms": 73190, "end_ms": 73600, "source": "1" },
-    { "word": "যেখানে", "start_ms": 74140, "end_ms": 74580, "source": "1" },
-    { "word": "ঘর", "start_ms": 74900, "end_ms": 75170, "source": "1" },
-    { "word": "নির্মাণ", "start_ms": 75520, "end_ms": 75920, "source": "1" },
-    { "word": "করেন", "start_ms": 76170, "end_ms": 76460, "source": "1" },
-    { "word": "প্রহ্লাদ", "start_ms": 76780, "end_ms": 77190, "source": "1" },
-    { "word": "বিশ্বাস,", "start_ms": 77550, "end_ms": 77990, "source": "1" },
-    { "word": "সেখান", "start_ms": 78420, "end_ms": 78820, "source": "1" },
-    { "word": "থেকে", "start_ms": 79060, "end_ms": 79350, "source": "1" },
-    { "word": "অন্য", "start_ms": 79650, "end_ms": 79950, "source": "1" },
-    { "word": "বাড়িগুলোতে", "start_ms": 80440, "end_ms": 80970, "source": "1" },
-    { "word": "যেতে", "start_ms": 81340, "end_ms": 81680, "source": "1" },
-    { "word": "পায়ে", "start_ms": 82010, "end_ms": 82320, "source": "1" },
-    { "word": "হেঁটে", "start_ms": 82630, "end_ms": 82950, "source": "1" },
-    { "word": "প্রায়", "start_ms": 83300, "end_ms": 83660, "source": "1" },
-    { "word": "১০", "start_ms": 83980, "end_ms": 84270, "source": "1" },
-    { "word": "থেকে", "start_ms": 84500, "end_ms": 84790, "source": "1" },
-    { "word": "১৫", "start_ms": 85110, "end_ms": 85460, "source": "1" },
-    { "word": "মিনিট", "start_ms": 85750, "end_ms": 86130, "source": "1" },
-    { "word": "সময়", "start_ms": 86400, "end_ms": 86690, "source": "1" },
-    { "word": "লাগে।", "start_ms": 87050, "end_ms": 87430, "source": "1" },
-    { "word": "বলতে", "start_ms": 87920, "end_ms": 88300, "source": "1" },
-    { "word": "পারেন", "start_ms": 88630, "end_ms": 88990, "source": "1" },
-    { "word": "যে", "start_ms": 89250, "end_ms": 89530, "source": "1" },
-    { "word": "ওই", "start_ms": 89810, "end_ms": 90110, "source": "1" },
-    { "word": "চতুরদিকে", "start_ms": 90540, "end_ms": 91100, "source": "1" },
-    { "word": "ফসলি", "start_ms": 91520, "end_ms": 91900, "source": "1" },
-    { "word": "জমির", "start_ms": 92190, "end_ms": 92570, "source": "1" },
-    { "word": "মাঝখানে", "start_ms": 93070, "end_ms": 93580, "source": "1" },
-    { "word": "একটি", "start_ms": 93960, "end_ms": 94310, "source": "1" },
-    { "word": "ভিটা।", "start_ms": 94690, "end_ms": 95150, "source": "1" },
-    { "word": "সেখানে", "start_ms": 95930, "end_ms": 96390, "source": "1" },
-    { "word": "প্রহ্লাদ", "start_ms": 96730, "end_ms": 97180, "source": "1" },
-    { "word": "বিশ্বাস,", "start_ms": 97530, "end_ms": 98010, "source": "1" },
-    { "word": "তার", "start_ms": 98320, "end_ms": 98570, "source": "1" },
-    { "word": "স্ত্রী", "start_ms": 99070, "end_ms": 99540, "source": "1" },
-    { "word": "এবং", "start_ms": 99880, "end_ms": 100200, "source": "1" },
-    { "word": "তার", "start_ms": 100430, "end_ms": 100690, "source": "1" },
-    { "word": "সন্তানকে", "start_ms": 101110, "end_ms": 101530, "source": "1" },
-    { "word": "নিয়ে", "start_ms": 101780, "end_ms": 102120, "source": "1" },
-    { "word": "একটি", "start_ms": 102460, "end_ms": 102790, "source": "1" },
-    { "word": "মাত্র", "start_ms": 103090, "end_ms": 103440, "source": "1" },
-    { "word": "পরিবার", "start_ms": 103850, "end_ms": 104270, "source": "1" },
-    { "word": "সেখানে", "start_ms": 104610, "end_ms": 105020, "source": "1" },
-    { "word": "বসবাস", "start_ms": 105430, "end_ms": 105860, "source": "1" },
-    { "word": "করে।", "start_ms": 106190, "end_ms": 106540, "source": "1" }
+    {
+      "word": "ঘটনাটির",
+      "start_ms": 0,
+      "end_ms": 710,
+      "source": "1"
+    },
+    {
+      "word": "সময়",
+      "start_ms": 777,
+      "end_ms": 2187,
+      "source": "1"
+    },
+    {
+      "word": "উনিশশো",
+      "start_ms": 2408,
+      "end_ms": 2828,
+      "source": "1"
+    },
+    {
+      "word": "ছিয়াত্তর",
+      "start_ms": 2950,
+      "end_ms": 3440,
+      "source": "1"
+    },
+    {
+      "word": "সাল।",
+      "start_ms": 3510,
+      "end_ms": 3880,
+      "source": "1"
+    },
+    {
+      "word": "নড়াইল",
+      "start_ms": 4118,
+      "end_ms": 4568,
+      "source": "1"
+    },
+    {
+      "word": "জেলার",
+      "start_ms": 4655,
+      "end_ms": 4995,
+      "source": "1"
+    },
+    {
+      "word": "লোহাগাড়া",
+      "start_ms": 5100,
+      "end_ms": 5600,
+      "source": "1"
+    },
+    {
+      "word": "উপজেলার",
+      "start_ms": 5710,
+      "end_ms": 6240,
+      "source": "1"
+    },
+    {
+      "word": "লাহুরিয়া",
+      "start_ms": 6353,
+      "end_ms": 6803,
+      "source": "1"
+    },
+    {
+      "word": "ইউনিয়নের",
+      "start_ms": 6919,
+      "end_ms": 7419,
+      "source": "1"
+    },
+    {
+      "word": "ছোট্ট",
+      "start_ms": 7503,
+      "end_ms": 7923,
+      "source": "1"
+    },
+    {
+      "word": "গ্রাম",
+      "start_ms": 8042,
+      "end_ms": 8492,
+      "source": "1"
+    },
+    {
+      "word": "লাহুরিয়া।",
+      "start_ms": 8611,
+      "end_ms": 9331,
+      "source": "1"
+    },
+    {
+      "word": "এই",
+      "start_ms": 9514,
+      "end_ms": 9754,
+      "source": "1"
+    },
+    {
+      "word": "গ্রামেই",
+      "start_ms": 9844,
+      "end_ms": 10274,
+      "source": "1"
+    },
+    {
+      "word": "প্রহ্লাদ",
+      "start_ms": 10382,
+      "end_ms": 10842,
+      "source": "1"
+    },
+    {
+      "word": "বিশ্বাস,",
+      "start_ms": 10964,
+      "end_ms": 11384,
+      "source": "1"
+    },
+    {
+      "word": "তার",
+      "start_ms": 11471,
+      "end_ms": 11721,
+      "source": "1"
+    },
+    {
+      "word": "স্ত্রী,",
+      "start_ms": 11823,
+      "end_ms": 12293,
+      "source": "1"
+    },
+    {
+      "word": "তার",
+      "start_ms": 12412,
+      "end_ms": 12632,
+      "source": "1"
+    },
+    {
+      "word": "তিন",
+      "start_ms": 12702,
+      "end_ms": 12992,
+      "source": "1"
+    },
+    {
+      "word": "ছেলে",
+      "start_ms": 13079,
+      "end_ms": 13399,
+      "source": "1"
+    },
+    {
+      "word": "প্রভাষ,",
+      "start_ms": 13515,
+      "end_ms": 14065,
+      "source": "1"
+    },
+    {
+      "word": "পঙ্কজ",
+      "start_ms": 14181,
+      "end_ms": 14691,
+      "source": "1"
+    },
+    {
+      "word": "ও",
+      "start_ms": 14740,
+      "end_ms": 14920,
+      "source": "1"
+    },
+    {
+      "word": "প্রকাশ।",
+      "start_ms": 15025,
+      "end_ms": 15545,
+      "source": "1"
+    },
+    {
+      "word": "প্রভাসের",
+      "start_ms": 15754,
+      "end_ms": 16174,
+      "source": "1"
+    },
+    {
+      "word": "বয়স",
+      "start_ms": 16235,
+      "end_ms": 16585,
+      "source": "1"
+    },
+    {
+      "word": "পঁয়ত্রিশ,",
+      "start_ms": 16722,
+      "end_ms": 17342,
+      "source": "1"
+    },
+    {
+      "word": "পঙ্কজের",
+      "start_ms": 17426,
+      "end_ms": 17826,
+      "source": "1"
+    },
+    {
+      "word": "বয়স",
+      "start_ms": 17893,
+      "end_ms": 18203,
+      "source": "1"
+    },
+    {
+      "word": "তিরিশের",
+      "start_ms": 18322,
+      "end_ms": 18732,
+      "source": "1"
+    },
+    {
+      "word": "কাকাছাকাছি।",
+      "start_ms": 18825,
+      "end_ms": 19595,
+      "source": "1"
+    },
+    {
+      "word": "বড়",
+      "start_ms": 19761,
+      "end_ms": 20071,
+      "source": "1"
+    },
+    {
+      "word": "এবং",
+      "start_ms": 20149,
+      "end_ms": 20419,
+      "source": "1"
+    },
+    {
+      "word": "মেজো",
+      "start_ms": 20506,
+      "end_ms": 20806,
+      "source": "1"
+    },
+    {
+      "word": "ছেলেকে",
+      "start_ms": 20914,
+      "end_ms": 21314,
+      "source": "1"
+    },
+    {
+      "word": "প্রহ্লাদ",
+      "start_ms": 21407,
+      "end_ms": 21807,
+      "source": "1"
+    },
+    {
+      "word": "বিশ্বাস",
+      "start_ms": 21917,
+      "end_ms": 22307,
+      "source": "1"
+    },
+    {
+      "word": "বিয়ে",
+      "start_ms": 22385,
+      "end_ms": 22705,
+      "source": "1"
+    },
+    {
+      "word": "দিয়েছেন।",
+      "start_ms": 22824,
+      "end_ms": 23344,
+      "source": "1"
+    },
+    {
+      "word": "একান্নবর্তী",
+      "start_ms": 23527,
+      "end_ms": 24157,
+      "source": "1"
+    },
+    {
+      "word": "পরিবারে",
+      "start_ms": 24262,
+      "end_ms": 24692,
+      "source": "1"
+    },
+    {
+      "word": "তাদের",
+      "start_ms": 24776,
+      "end_ms": 25056,
+      "source": "1"
+    },
+    {
+      "word": "বসবাস।",
+      "start_ms": 25181,
+      "end_ms": 25661,
+      "source": "1"
+    },
+    {
+      "word": "কিন্তু",
+      "start_ms": 25815,
+      "end_ms": 26205,
+      "source": "1"
+    },
+    {
+      "word": "ছেলের",
+      "start_ms": 26304,
+      "end_ms": 26684,
+      "source": "1"
+    },
+    {
+      "word": "বউ",
+      "start_ms": 26789,
+      "end_ms": 27219,
+      "source": "1"
+    },
+    {
+      "word": "এবং",
+      "start_ms": 27306,
+      "end_ms": 27616,
+      "source": "1"
+    },
+    {
+      "word": "ছেলের",
+      "start_ms": 27700,
+      "end_ms": 28070,
+      "source": "1"
+    },
+    {
+      "word": "পরিবারের",
+      "start_ms": 28195,
+      "end_ms": 28645,
+      "source": "1"
+    },
+    {
+      "word": "সাথে",
+      "start_ms": 28721,
+      "end_ms": 29031,
+      "source": "1"
+    },
+    {
+      "word": "প্রহ্লাদ",
+      "start_ms": 29121,
+      "end_ms": 29511,
+      "source": "1"
+    },
+    {
+      "word": "বিশ্বাস",
+      "start_ms": 29619,
+      "end_ms": 30029,
+      "source": "1"
+    },
+    {
+      "word": "ও",
+      "start_ms": 30084,
+      "end_ms": 30234,
+      "source": "1"
+    },
+    {
+      "word": "তার",
+      "start_ms": 30301,
+      "end_ms": 30511,
+      "source": "1"
+    },
+    {
+      "word": "স্ত্রীর",
+      "start_ms": 30616,
+      "end_ms": 30986,
+      "source": "1"
+    },
+    {
+      "word": "বনিবনা",
+      "start_ms": 31111,
+      "end_ms": 31561,
+      "source": "1"
+    },
+    {
+      "word": "না",
+      "start_ms": 31642,
+      "end_ms": 31912,
+      "source": "1"
+    },
+    {
+      "word": "হওয়ায়",
+      "start_ms": 32031,
+      "end_ms": 32521,
+      "source": "1"
+    },
+    {
+      "word": "ছোট",
+      "start_ms": 32623,
+      "end_ms": 32903,
+      "source": "1"
+    },
+    {
+      "word": "ছেলে",
+      "start_ms": 32990,
+      "end_ms": 33300,
+      "source": "1"
+    },
+    {
+      "word": "প্রকাশকে",
+      "start_ms": 33416,
+      "end_ms": 33906,
+      "source": "1"
+    },
+    {
+      "word": "নিয়ে",
+      "start_ms": 33973,
+      "end_ms": 34283,
+      "source": "1"
+    },
+    {
+      "word": "তাদের",
+      "start_ms": 34361,
+      "end_ms": 34631,
+      "source": "1"
+    },
+    {
+      "word": "বাড়ি",
+      "start_ms": 34724,
+      "end_ms": 35044,
+      "source": "1"
+    },
+    {
+      "word": "থেকে",
+      "start_ms": 35120,
+      "end_ms": 35410,
+      "source": "1"
+    },
+    {
+      "word": "কিছুটা",
+      "start_ms": 35529,
+      "end_ms": 35909,
+      "source": "1"
+    },
+    {
+      "word": "দুরে",
+      "start_ms": 36028,
+      "end_ms": 36418,
+      "source": "1"
+    },
+    {
+      "word": "তাদেরই",
+      "start_ms": 36557,
+      "end_ms": 36967,
+      "source": "1"
+    },
+    {
+      "word": "দীর্ঘদিন",
+      "start_ms": 37101,
+      "end_ms": 37561,
+      "source": "1"
+    },
+    {
+      "word": "ধরে",
+      "start_ms": 37637,
+      "end_ms": 37897,
+      "source": "1"
+    },
+    {
+      "word": "পতিত",
+      "start_ms": 37993,
+      "end_ms": 38343,
+      "source": "1"
+    },
+    {
+      "word": "থাকা",
+      "start_ms": 38421,
+      "end_ms": 38741,
+      "source": "1"
+    },
+    {
+      "word": "একটি",
+      "start_ms": 38822,
+      "end_ms": 39132,
+      "source": "1"
+    },
+    {
+      "word": "জমিতে",
+      "start_ms": 39248,
+      "end_ms": 39618,
+      "source": "1"
+    },
+    {
+      "word": "তিনটি",
+      "start_ms": 39720,
+      "end_ms": 40060,
+      "source": "1"
+    },
+    {
+      "word": "ঘর",
+      "start_ms": 40133,
+      "end_ms": 40413,
+      "source": "1"
+    },
+    {
+      "word": "নির্মাণ",
+      "start_ms": 40532,
+      "end_ms": 40922,
+      "source": "1"
+    },
+    {
+      "word": "করেন।",
+      "start_ms": 41030,
+      "end_ms": 41410,
+      "source": "1"
+    },
+    {
+      "word": "ওই",
+      "start_ms": 41518,
+      "end_ms": 41808,
+      "source": "1"
+    },
+    {
+      "word": "জমির",
+      "start_ms": 41895,
+      "end_ms": 42235,
+      "source": "1"
+    },
+    {
+      "word": "চতুরদিকে",
+      "start_ms": 42366,
+      "end_ms": 42926,
+      "source": "1"
+    },
+    {
+      "word": "রয়েছে",
+      "start_ms": 43010,
+      "end_ms": 43380,
+      "source": "1"
+    },
+    {
+      "word": "ফসলি",
+      "start_ms": 43490,
+      "end_ms": 43860,
+      "source": "1"
+    },
+    {
+      "word": "জমি।",
+      "start_ms": 43959,
+      "end_ms": 44289,
+      "source": "1"
+    },
+    {
+      "word": "সেটি",
+      "start_ms": 44460,
+      "end_ms": 44780,
+      "source": "1"
+    },
+    {
+      "word": "আসলে",
+      "start_ms": 44864,
+      "end_ms": 45194,
+      "source": "1"
+    },
+    {
+      "word": "কোনো",
+      "start_ms": 45278,
+      "end_ms": 45598,
+      "source": "1"
+    },
+    {
+      "word": "গ্রাম",
+      "start_ms": 45700,
+      "end_ms": 46020,
+      "source": "1"
+    },
+    {
+      "word": "নয়।",
+      "start_ms": 46125,
+      "end_ms": 46395,
+      "source": "1"
+    },
+    {
+      "word": "গ্রামটা",
+      "start_ms": 46532,
+      "end_ms": 46962,
+      "source": "1"
+    },
+    {
+      "word": "ফসলি",
+      "start_ms": 47064,
+      "end_ms": 47434,
+      "source": "1"
+    },
+    {
+      "word": "জমির",
+      "start_ms": 47515,
+      "end_ms": 47905,
+      "source": "1"
+    },
+    {
+      "word": "ঠিক",
+      "start_ms": 47986,
+      "end_ms": 48276,
+      "source": "1"
+    },
+    {
+      "word": "পাশে।",
+      "start_ms": 48381,
+      "end_ms": 48791,
+      "source": "1"
+    },
+    {
+      "word": "যেখানে",
+      "start_ms": 48948,
+      "end_ms": 49388,
+      "source": "1"
+    },
+    {
+      "word": "ঘর",
+      "start_ms": 49481,
+      "end_ms": 49751,
+      "source": "1"
+    },
+    {
+      "word": "নির্মাণ",
+      "start_ms": 49853,
+      "end_ms": 50253,
+      "source": "1"
+    },
+    {
+      "word": "করেন",
+      "start_ms": 50326,
+      "end_ms": 50616,
+      "source": "1"
+    },
+    {
+      "word": "প্রহ্লাদ",
+      "start_ms": 50709,
+      "end_ms": 51119,
+      "source": "1"
+    },
+    {
+      "word": "বিশ্বাস,",
+      "start_ms": 51224,
+      "end_ms": 51664,
+      "source": "1"
+    },
+    {
+      "word": "সেখান",
+      "start_ms": 51789,
+      "end_ms": 52189,
+      "source": "1"
+    },
+    {
+      "word": "থেকে",
+      "start_ms": 52259,
+      "end_ms": 52549,
+      "source": "1"
+    },
+    {
+      "word": "অন্য",
+      "start_ms": 52636,
+      "end_ms": 52936,
+      "source": "1"
+    },
+    {
+      "word": "বাড়িগুলোতে",
+      "start_ms": 53078,
+      "end_ms": 53608,
+      "source": "1"
+    },
+    {
+      "word": "যেতে",
+      "start_ms": 53716,
+      "end_ms": 54056,
+      "source": "1"
+    },
+    {
+      "word": "পায়ে",
+      "start_ms": 54152,
+      "end_ms": 54462,
+      "source": "1"
+    },
+    {
+      "word": "হেঁটে",
+      "start_ms": 54552,
+      "end_ms": 54872,
+      "source": "1"
+    },
+    {
+      "word": "প্রায়",
+      "start_ms": 54974,
+      "end_ms": 55334,
+      "source": "1"
+    },
+    {
+      "word": "১০",
+      "start_ms": 55427,
+      "end_ms": 55717,
+      "source": "1"
+    },
+    {
+      "word": "থেকে",
+      "start_ms": 55784,
+      "end_ms": 56074,
+      "source": "1"
+    },
+    {
+      "word": "১৫",
+      "start_ms": 56167,
+      "end_ms": 56517,
+      "source": "1"
+    },
+    {
+      "word": "মিনিট",
+      "start_ms": 56601,
+      "end_ms": 56981,
+      "source": "1"
+    },
+    {
+      "word": "সময়",
+      "start_ms": 57059,
+      "end_ms": 57349,
+      "source": "1"
+    },
+    {
+      "word": "লাগে।",
+      "start_ms": 57454,
+      "end_ms": 57834,
+      "source": "1"
+    },
+    {
+      "word": "বলতে",
+      "start_ms": 57976,
+      "end_ms": 58356,
+      "source": "1"
+    },
+    {
+      "word": "পারেন",
+      "start_ms": 58452,
+      "end_ms": 58812,
+      "source": "1"
+    },
+    {
+      "word": "যে",
+      "start_ms": 58888,
+      "end_ms": 59168,
+      "source": "1"
+    },
+    {
+      "word": "ওই",
+      "start_ms": 59249,
+      "end_ms": 59549,
+      "source": "1"
+    },
+    {
+      "word": "চতুরদিকে",
+      "start_ms": 59674,
+      "end_ms": 60234,
+      "source": "1"
+    },
+    {
+      "word": "ফসলি",
+      "start_ms": 60356,
+      "end_ms": 60736,
+      "source": "1"
+    },
+    {
+      "word": "জমির",
+      "start_ms": 60820,
+      "end_ms": 61200,
+      "source": "1"
+    },
+    {
+      "word": "মাঝখানে",
+      "start_ms": 61345,
+      "end_ms": 61855,
+      "source": "1"
+    },
+    {
+      "word": "একটি",
+      "start_ms": 61965,
+      "end_ms": 62315,
+      "source": "1"
+    },
+    {
+      "word": "ভিটা।",
+      "start_ms": 62425,
+      "end_ms": 62885,
+      "source": "1"
+    },
+    {
+      "word": "সেখানে",
+      "start_ms": 63112,
+      "end_ms": 63572,
+      "source": "1"
+    },
+    {
+      "word": "প্রহ্লাদ",
+      "start_ms": 63671,
+      "end_ms": 64121,
+      "source": "1"
+    },
+    {
+      "word": "বিশ্বাস,",
+      "start_ms": 64223,
+      "end_ms": 64703,
+      "source": "1"
+    },
+    {
+      "word": "তার",
+      "start_ms": 64793,
+      "end_ms": 65043,
+      "source": "1"
+    },
+    {
+      "word": "স্ত্রী",
+      "start_ms": 65188,
+      "end_ms": 65658,
+      "source": "1"
+    },
+    {
+      "word": "এবং",
+      "start_ms": 65757,
+      "end_ms": 66077,
+      "source": "1"
+    },
+    {
+      "word": "তার",
+      "start_ms": 66144,
+      "end_ms": 66404,
+      "source": "1"
+    },
+    {
+      "word": "সন্তানকে",
+      "start_ms": 66526,
+      "end_ms": 66946,
+      "source": "1"
+    },
+    {
+      "word": "নিয়ে",
+      "start_ms": 67019,
+      "end_ms": 67359,
+      "source": "1"
+    },
+    {
+      "word": "একটি",
+      "start_ms": 67458,
+      "end_ms": 67788,
+      "source": "1"
+    },
+    {
+      "word": "মাত্র",
+      "start_ms": 67875,
+      "end_ms": 68225,
+      "source": "1"
+    },
+    {
+      "word": "পরিবার",
+      "start_ms": 68344,
+      "end_ms": 68764,
+      "source": "1"
+    },
+    {
+      "word": "সেখানে",
+      "start_ms": 68863,
+      "end_ms": 69273,
+      "source": "1"
+    },
+    {
+      "word": "বসবাস",
+      "start_ms": 69392,
+      "end_ms": 69822,
+      "source": "1"
+    },
+    {
+      "word": "করে।",
+      "start_ms": 69918,
+      "end_ms": 70268,
+      "source": "1"
+    }
   ]
 }
