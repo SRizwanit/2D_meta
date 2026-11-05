@@ -1,3 +1,4 @@
+import React from 'react';
 import {Audio, staticFile} from 'remotion';
 
 export const AudioEngine: React.FC = () => {

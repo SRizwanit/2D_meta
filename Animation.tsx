@@ -1,4 +1,4 @@
-import {useCurrentFrame, interpolate, spring, useVideoConfig} from 'remotion';
+import {useCurrentFrame, interpolate, spring, useVideoConfig, random} from 'remotion';
 
 export const useFadeIn = (duration=15) => {
   const frame = useCurrentFrame();
@@ -31,7 +31,9 @@ export const useTypewriter = (text: string, speed=2) => {
 export const useShake = (intensity=0, startFrame=99999, duration=10) => {
   const frame = useCurrentFrame();
   if(frame < startFrame || frame > startFrame+duration) return {x:0, y:0};
-  const {x, y} = {x: (Math.random()-0.5)*intensity*2, y: (Math.random()-0.5)*intensity*2};
+  // Deterministic per-frame randomness (Math.random() breaks chunked/parallel rendering)
+  const x = (random(`shake-x-${frame}`)-0.5)*intensity*2;
+  const y = (random(`shake-y-${frame}`)-0.5)*intensity*2;
   return {x,y};
 };
 

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {AbsoluteFill, useVideoConfig, Audio, staticFile, Sequence, Loop} from 'remotion';
+import {AbsoluteFill, useVideoConfig, Audio, staticFile, Sequence, Loop, delayRender, continueRender} from 'remotion';
 import {Scene} from './Scene';
 import {parseTimestampData, SceneGroup} from './AudioEngine';
 import {LAYOUT} from './Styles';
@@ -8,6 +8,8 @@ export const MainComposition: React.FC = () => {
   const {fps} = useVideoConfig();
   const [groups, setGroups] = useState<SceneGroup[]>([]);
   const [loaded, setLoaded] = useState(false);
+  // Hold the renderer until timestamp data is loaded - otherwise frames capture the "Loading" screen
+  const [handle] = useState(() => delayRender('Loading timestamp.json'));
 
   useEffect(()=>{
     // Try multiple paths - for flat structure + public/
@@ -45,6 +47,10 @@ export const MainComposition: React.FC = () => {
     };
     tryFetch();
   },[]);
+
+  useEffect(()=>{
+    if(loaded) continueRender(handle);
+  },[loaded, handle]);
 
   if(!loaded){
     return <AbsoluteFill style={{background:'black', color:'white', display:'flex', alignItems:'center', justifyContent:'center', fontFamily:'sans-serif'}}>Loading Lahuria story...</AbsoluteFill>;
