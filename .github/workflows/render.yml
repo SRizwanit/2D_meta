@@ -12,173 +12,207 @@ on:
         required: false
         default: '500'
 
-# No timeout limit - max allowed for public repo is 360 minutes (6 hours)
-# This is effectively no timeout for your ghost stories
+permissions:
+  contents: write
+
+# Pipeline:
+#   plan   -> reads timestamp data, works out total frames, splits them into chunks
+#   render -> ONE JOB PER CHUNK (matrix). Each chunk uploads its own artifact
+#             the moment it finishes, so you can download it right away.
+#   stitch -> downloads all chunks, joins them, adds audio, uploads the final video
+
 jobs:
+  # ------------------------------------------------------------------
+  # 1) PLAN - total frames + chunk list (single source of truth)
+  # ------------------------------------------------------------------
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.calc.outputs.matrix }}
+      total_frames: ${{ steps.calc.outputs.total_frames }}
+      duration_sec: ${{ steps.calc.outputs.duration_sec }}
+      chunk_count: ${{ steps.calc.outputs.chunk_count }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Prepare timestamp
+        run: |
+          mkdir -p public
+          if [ -f "timestamp.json" ]; then cp timestamp.json public/timestamp.json; echo "Copied timestamp.json to public/"; fi
+          if [ -f "Rizwan_story1.json" ]; then cp Rizwan_story1.json public/timestamp.json; echo "Copied Rizwan_story1.json to public/timestamp.json"; fi
+          if [ -f "public/timestamp.json" ]; then echo "timestamp.json found"; head -c 500 public/timestamp.json; echo; fi
+
+      - name: Calculate total frames and chunk list
+        id: calc
+        env:
+          CHUNK_SIZE: ${{ github.event.inputs.chunk_size || 500 }}
+        run: |
+          node << 'NODE'
+          const fs = require('fs');
+          const FPS = 30;
+          const TAIL_SECONDS = 2; // must match TAIL_SECONDS in Root.tsx
+          let durationSec = 180;  // default 3 min
+          try {
+            const data = JSON.parse(fs.readFileSync('public/timestamp.json', 'utf-8'));
+            let lastEndSec = null;
+            let words = [];
+            if (data.transcription) words = data.transcription;
+            else if (data.words) words = data.words;
+            else if (Array.isArray(data) && data[0]?.word) words = data;
+            if (words.length) {
+              const last = words[words.length - 1];
+              lastEndSec = (last.end_ms || last.end || 0) / 1000;
+              console.log(`Word format: ${words.length} words`);
+            } else if (Array.isArray(data) && data[0]?.text) {
+              lastEndSec = data[data.length - 1].end;
+              console.log(`Scene format: ${data.length} scenes`);
+            }
+            if (lastEndSec !== null) durationSec = Math.ceil(lastEndSec + TAIL_SECONDS);
+          } catch (e) {
+            console.log('Could not parse timestamp.json, using default', e.message);
+          }
+          const totalFrames = durationSec * FPS;
+          const chunkSize = Math.max(1, parseInt(process.env.CHUNK_SIZE, 10) || 500);
+
+          const pad = (n) => String(n).padStart(5, '0');
+          const include = [];
+          for (let start = 0; start < totalFrames; start += chunkSize) {
+            const end = Math.min(start + chunkSize - 1, totalFrames - 1);
+            include.push({ start, end, label: `${pad(start)}-${pad(end)}` });
+          }
+          console.log(`durationSec=${durationSec} totalFrames=${totalFrames} chunks=${include.length}`);
+          console.log(include.map(c => `${c.start}-${c.end}`).join('  '));
+
+          fs.appendFileSync(process.env.GITHUB_OUTPUT,
+            `matrix=${JSON.stringify({ include })}\n` +
+            `total_frames=${totalFrames}\n` +
+            `duration_sec=${durationSec}\n` +
+            `chunk_count=${include.length}\n`);
+          NODE
+
+  # ------------------------------------------------------------------
+  # 2) RENDER - one job per chunk, each uploads its own artifact when done
+  # ------------------------------------------------------------------
   render:
+    name: Render frames ${{ matrix.start }}-${{ matrix.end }}
+    needs: plan
     runs-on: ubuntu-latest
     timeout-minutes: 360
-    permissions:
-      contents: write
+    strategy:
+      fail-fast: false   # one failed chunk never cancels the others
+      max-parallel: 4
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: |
+          npm install --no-audit --no-fund
+          ls -lh node_modules/.bin/remotion
+
+      - name: Prepare audio and timestamp
+        run: |
+          mkdir -p public out
+          if [ -f "timestamp.json" ]; then cp timestamp.json public/timestamp.json; fi
+          if [ -f "Rizwan_story1.json" ]; then cp Rizwan_story1.json public/timestamp.json; echo "Copied Rizwan_story1.json to public/timestamp.json"; fi
+          if [ -f "audio.mp3" ]; then cp audio.mp3 public/audio.mp3; echo "Copied audio.mp3 to public/"; fi
+          ls -lh public/
+
+      - name: Render chunk ${{ matrix.start }}-${{ matrix.end }}
+        run: |
+          CHUNK_FILE="out/chunk_${{ matrix.start }}_${{ matrix.end }}.mp4"
+          echo "=== Rendering frames ${{ matrix.start }}-${{ matrix.end }} -> $CHUNK_FILE ==="
+          OK=0
+          for ATTEMPT in 1 2; do
+            if npx remotion render index.ts Composition "$CHUNK_FILE" \
+                 --frames=${{ matrix.start }}-${{ matrix.end }} \
+                 --codec=h264 --image-format=jpeg --concurrency=1 --muted --overwrite --log=verbose; then
+              OK=1; break
+            fi
+            echo "Attempt $ATTEMPT failed, retrying once..."
+            sleep 2
+          done
+          [ "$OK" = "1" ] || { echo "Chunk failed after retry"; exit 1; }
+          echo "Chunk done: $(du -h "$CHUNK_FILE" | cut -f1)"
+          ls -lh out/
+
+      # Runs right after THIS chunk finishes - not waiting for the other chunks
+      - name: Upload this chunk as its own artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: video-chunk-${{ matrix.label }}
+          path: out/chunk_${{ matrix.start }}_${{ matrix.end }}.mp4
+          retention-days: 7
+          if-no-files-found: error
+
+  # ------------------------------------------------------------------
+  # 3) STITCH - join all chunks, add audio, publish final video
+  # ------------------------------------------------------------------
+  stitch:
+    name: Stitch final video
+    needs: [plan, render]
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Setup Node.js 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          # cache: 'npm' # Disabled to prevent missing lock file error
-
       - name: Install FFmpeg
         run: |
           sudo apt-get update
           sudo apt-get install -y ffmpeg
-          ffmpeg -version
+          ffmpeg -version | head -1
 
-      - name: Install dependencies
-        run: |
-          echo "Installing dependencies (npm install)..."
-          npm install --no-audit --no-fund
-          echo "Node and Remotion installed"
-          ls -lh node_modules/.bin/remotion || true
-
-      - name: Prepare audio and timestamp
-        run: |
-          mkdir -p public out .chunks
-          # Your files are in root as per requirement - copy to public for Remotion staticFile
-          if [ -f "timestamp.json" ]; then cp timestamp.json public/timestamp.json; echo "Copied timestamp.json to public/"; fi
-          if [ -f "Rizwan_story1.json" ]; then cp Rizwan_story1.json public/timestamp.json; echo "Copied Rizwan_story1.json to public/timestamp.json"; fi
-          if [ -f "audio.mp3" ]; then cp audio.mp3 public/audio.mp3; echo "Copied audio.mp3 to public/"; fi
-          if [ -f "public/timestamp.json" ]; then echo "timestamp.json found"; cat public/timestamp.json | head -c 500; fi
-          ls -lh public/ || true
-
-      - name: Calculate total frames from timestamp.json
-        id: calc
-        run: |
-          node << 'NODE'
-          const fs = require('fs');
-          let totalFrames = 30 * 180; // default 3 min
-          let durationSec = 180;
-          try {
-            const raw = fs.readFileSync('public/timestamp.json', 'utf-8');
-            const data = JSON.parse(raw);
-            let words = [];
-            if(data.transcription) words = data.transcription;
-            else if(Array.isArray(data) && data[0]?.word) words = data;
-            else if(Array.isArray(data) && data[0]?.text) {
-              // New format [{start,end,text}]
-              const last = data[data.length-1];
-              durationSec = Math.ceil(last.end + 2);
-              totalFrames = Math.ceil(durationSec * 30);
-              console.log(`New format detected: duration ${durationSec}s, frames ${totalFrames}`);
-            }
-            if(words.length){
-              const last = words[words.length-1];
-              const endMs = last.end_ms || last.end || 0;
-              durationSec = Math.ceil(endMs/1000 + 2);
-              totalFrames = Math.ceil(durationSec * 30);
-              console.log(`Word format: ${words.length} words, duration ${durationSec}s, totalFrames ${totalFrames}`);
-            }
-          } catch(e){
-            console.log('Could not parse timestamp.json, using default', e.message);
-          }
-          fs.writeFileSync('total_frames.txt', String(totalFrames));
-          
-          // Fixed environment file writing using standard GITHUB_ENV syntax
-          const envPath = process.env.GITHUB_ENV;
-          if (envPath) {
-            fs.appendFileSync(envPath, `TOTAL_FRAMES=${totalFrames}\n`);
-            fs.appendFileSync(envPath, `DURATION_SEC=${durationSec}\n`);
-          }
-          console.log(`TOTAL_FRAMES=${totalFrames}`);
-          console.log(`DURATION_SEC=${durationSec}`);
-          NODE
-          echo "Total frames: $(cat total_frames.txt)"
-
-      - name: Render video in 500-frame chunks (no timeout, artifact per chunk)
-        run: |
-          set -e
-          TOTAL=$(cat total_frames.txt)
-          CHUNK_SIZE=${{ github.event.inputs.chunk_size || 500 }}
-          echo "Rendering $TOTAL frames in chunks of $CHUNK_SIZE"
-          
-          # Function to render chunk
-          render_chunk() {
-            local START=$1
-            local END=$2
-            local CHUNK_FILE="out/chunk_${START}_${END}.mp4"
-            echo "=== Rendering frames $START-$END -> $CHUNK_FILE ==="
-            npx remotion render index.ts Composition "$CHUNK_FILE" --frames=$START-$END --codec=h264 --image-format=jpeg --concurrency=1 --muted --overwrite --log=verbose || {
-              echo "Chunk $START-$END failed, retrying once..."
-              sleep 2
-              npx remotion render index.ts Composition "$CHUNK_FILE" --frames=$START-$END --codec=h264 --image-format=jpeg --concurrency=1 --muted --overwrite
-            }
-            echo "Chunk $START-$END done: $(du -h $CHUNK_FILE | cut -f1)"
-            # Create marker for artifact upload tracking
-            echo "$START-$END" >> .chunks/completed.txt
-            ls -lh out/
-          }
-          
-          mkdir -p out .chunks
-          echo "" > .chunks/completed.txt
-          
-          # Loop through chunks
-          START=0
-          while [ $START -lt $TOTAL ]; do
-            END=$((START + CHUNK_SIZE - 1))
-            if [ $END -ge $TOTAL ]; then END=$((TOTAL - 1)); fi
-            render_chunk $START $END
-            START=$((END + 1))
-            # Free memory
-            echo "Memory after chunk: $(free -h | grep Mem)"
-          done
-          
-          echo "All chunks rendered:"
-          ls -lh out/
-          cat .chunks/completed.txt
-
-      - name: Upload all chunks as artifact (every 500 frames)
-        uses: actions/upload-artifact@v4
+      - name: Download all chunk artifacts
+        uses: actions/download-artifact@v4
         with:
-          name: video-chunks-500frames-each
-          path: out/chunk_*.mp4
-          retention-days: 7
-          if-no-files-found: error
-
-      - name: Upload chunk completion log
-        uses: actions/upload-artifact@v4
-        with:
-          name: render-log
-          path: .chunks/completed.txt
-          retention-days: 7
+          pattern: video-chunk-*
+          path: out
+          merge-multiple: true
 
       - name: Stitch chunks into final video
         run: |
           set -e
-          echo "Creating concat list..."
-          # Create concat file for ffmpeg
+          EXPECTED=${{ needs.plan.outputs.chunk_count }}
+          FOUND=$(ls out/chunk_*.mp4 | wc -l)
+          echo "Chunks expected: $EXPECTED, found: $FOUND"
+          [ "$FOUND" = "$EXPECTED" ] || { echo "Missing chunks!"; exit 1; }
+
           rm -f out/concat.txt
           for f in $(ls out/chunk_*.mp4 | sort -V); do
             echo "file '$(pwd)/$f'" >> out/concat.txt
           done
-          echo "Concat list:"
-          cat out/concat.txt
-          
-          echo "Stitching video chunks with ffmpeg..."
+          echo "Concat list:"; cat out/concat.txt
+
+          echo "Stitching video chunks..."
           ffmpeg -y -f concat -safe 0 -i out/concat.txt -c copy out/final_raw.mp4
-          
-          echo "Muxing audio once over the full video (no chunk-boundary audio glitches)..."
+
+          echo "Adding audio once over the full video (no chunk-boundary glitches)..."
           if [ -f audio.mp3 ]; then
-            ffmpeg -y -i out/final_raw.mp4 -i audio.mp3 -map 0:v:0 -map 1:a:0 -c:v libx264 -preset medium -crf 18 -pix_fmt yuv420p -c:a aac -b:a 192k -movflags +faststart out/final.mp4
+            ffmpeg -y -i out/final_raw.mp4 -i audio.mp3 -map 0:v:0 -map 1:a:0 \
+              -c:v libx264 -preset medium -crf 18 -pix_fmt yuv420p \
+              -c:a aac -b:a 192k -movflags +faststart out/final.mp4
           else
             echo "audio.mp3 not found - encoding video only"
-            ffmpeg -y -i out/final_raw.mp4 -c:v libx264 -preset medium -crf 18 -pix_fmt yuv420p -movflags +faststart out/final.mp4
+            ffmpeg -y -i out/final_raw.mp4 \
+              -c:v libx264 -preset medium -crf 18 -pix_fmt yuv420p \
+              -movflags +faststart out/final.mp4
           fi
-          
+
           echo "Final video info:"
           ffprobe -v error -show_entries stream=codec_name,duration,bit_rate -of default out/final.mp4 || true
           ls -lh out/final.mp4 out/final_raw.mp4
@@ -194,27 +228,23 @@ jobs:
       - name: Push final video to repo (optional)
         run: |
           set -e
-          # Configure git
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          
-          # Create videos folder if not exists
+
           mkdir -p videos
           TIMESTAMP=$(date +%Y%m%d_%H%M%S)
           cp out/final.mp4 videos/final_${TIMESTAMP}.mp4
           cp out/final.mp4 final.mp4 || true
-          
-          # Add and commit if there are changes
+
           git add -f videos/final_${TIMESTAMP}.mp4 final.mp4 || true
-          git add -f out/final.mp4 || true
-          
+
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
             git commit -m "Add rendered video ${TIMESTAMP} [skip ci]" || echo "Commit failed, maybe no changes"
             git push origin HEAD:${{ github.ref_name || 'main' }} || {
               echo "Push failed, trying main branch"
-              git push origin HEAD:main || echo "Push failed - you may need to allow workflow to push"
+              git push origin HEAD:main || echo "Push failed - allow workflow write permission in repo settings"
             }
           fi
           echo "Push attempt done"
@@ -223,11 +253,11 @@ jobs:
         run: |
           echo "## Render Complete! 🎬" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "- Total frames: $TOTAL_FRAMES" >> $GITHUB_STEP_SUMMARY
-          echo "- Duration: $DURATION_SEC seconds" >> $GITHUB_STEP_SUMMARY
-          echo "- Chunks: $(ls out/chunk_*.mp4 | wc -l) x 500 frames" >> $GITHUB_STEP_SUMMARY
+          echo "- Total frames: ${{ needs.plan.outputs.total_frames }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Duration: ${{ needs.plan.outputs.duration_sec }} seconds" >> $GITHUB_STEP_SUMMARY
+          echo "- Chunks: ${{ needs.plan.outputs.chunk_count }}" >> $GITHUB_STEP_SUMMARY
           echo "- Final video: out/final.mp4 ($(du -h out/final.mp4 | cut -f1))" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Artifacts:" >> $GITHUB_STEP_SUMMARY
-          echo "- video-chunks-500frames-each: All 500-frame chunks" >> $GITHUB_STEP_SUMMARY
+          echo "- video-chunk-<start>-<end>: one artifact per chunk, uploaded as soon as that chunk finished" >> $GITHUB_STEP_SUMMARY
           echo "- final-video-full: Stitched full video" >> $GITHUB_STEP_SUMMARY
