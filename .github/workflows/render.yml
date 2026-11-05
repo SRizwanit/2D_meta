@@ -112,10 +112,10 @@ jobs:
             local END=$2
             local CHUNK_FILE="out/chunk_${START}_${END}.mp4"
             echo "=== Rendering frames $START-$END -> $CHUNK_FILE ==="
-            npx remotion render Composition "$CHUNK_FILE" --frames=$START-$END --codec=h264 --image-format=jpeg --concurrency=1 --overwrite --log=verbose || {
+            npx remotion render index.ts Composition "$CHUNK_FILE" --frames=$START-$END --codec=h264 --image-format=jpeg --concurrency=1 --muted --overwrite --log=verbose || {
               echo "Chunk $START-$END failed, retrying once..."
               sleep 2
-              npx remotion render Composition "$CHUNK_FILE" --frames=$START-$END --codec=h264 --image-format=jpeg --concurrency=1 --overwrite
+              npx remotion render index.ts Composition "$CHUNK_FILE" --frames=$START-$END --codec=h264 --image-format=jpeg --concurrency=1 --muted --overwrite
             }
             echo "Chunk $START-$END done: $(du -h $CHUNK_FILE | cut -f1)"
             # Create marker for artifact upload tracking
@@ -168,11 +168,16 @@ jobs:
           echo "Concat list:"
           cat out/concat.txt
           
-          echo "Stitching with ffmpeg..."
-          ffmpeg -f concat -safe 0 -i out/concat.txt -c copy out/final_raw.mp4
+          echo "Stitching video chunks with ffmpeg..."
+          ffmpeg -y -f concat -safe 0 -i out/concat.txt -c copy out/final_raw.mp4
           
-          echo "Re-encoding final for compatibility..."
-          ffmpeg -i out/final_raw.mp4 -c:v libx264 -c:a aac -movflags +faststart out/final.mp4 -y
+          echo "Muxing audio once over the full video (no chunk-boundary audio glitches)..."
+          if [ -f audio.mp3 ]; then
+            ffmpeg -y -i out/final_raw.mp4 -i audio.mp3 -map 0:v:0 -map 1:a:0 -c:v libx264 -preset medium -crf 18 -pix_fmt yuv420p -c:a aac -b:a 192k -movflags +faststart out/final.mp4
+          else
+            echo "audio.mp3 not found - encoding video only"
+            ffmpeg -y -i out/final_raw.mp4 -c:v libx264 -preset medium -crf 18 -pix_fmt yuv420p -movflags +faststart out/final.mp4
+          fi
           
           echo "Final video info:"
           ffprobe -v error -show_entries stream=codec_name,duration,bit_rate -of default out/final.mp4 || true
