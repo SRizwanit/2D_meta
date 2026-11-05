@@ -1,0 +1,16 @@
+# PLACEHOLDER for Step 7 - will be replaced
+# This file in root should be moved to .github/workflows/render.yml
+name: Render Video
+on: [workflow_dispatch]
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 20}
+      - run: npm ci
+      - run: npx remotion render Composition out/final.mp4 --codec=h264 --concurrency=1
+      - uses: actions/upload-artifact@v4
+        with: {name: final-video, path: out/final.mp4}
